@@ -25,17 +25,24 @@ if (!fs.existsSync(uploadsPath)) {
 }
 
 // middlewares
+import cors from "cors";
+
+// ...
+
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",                    // local dev
-      "https://img-uploader-tufail.vercel.app"    // your Vercel frontend
+      "http://localhost:5173",                     // local dev
+      "https://img-uploader-tufail.vercel.app/"    // your Vercel frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
+    credentials: true,
   })
 );
+
+app.options("*", cors());
+
 
 // (optional but sometimes helps with preflight)
 app.options("*", cors());
